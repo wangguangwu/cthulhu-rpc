@@ -128,12 +128,27 @@
             </dependency>
             <dependency>
                 <groupId>com.cthulhu</groupId>
-                <artifactId>rpc-protocol-custom</artifactId>
+                <artifactId>rpc-protocol-cthulhu</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.cthulhu</groupId>
                 <artifactId>rpc-protocol-dubbo</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-protocol-http</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-protocol-grpc</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-protocol-thrift</artifactId>
                 <version>${project.version}</version>
             </dependency>
             

@@ -8,7 +8,7 @@
         <artifactId>rpc-protocol</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>rpc-protocol-custom</artifactId>
+    <artifactId>rpc-protocol-cthulhu</artifactId>
     
     <dependencies>
         <dependency>

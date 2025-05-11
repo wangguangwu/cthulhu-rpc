@@ -19,5 +19,10 @@
             <groupId>com.cthulhu</groupId>
             <artifactId>rpc-common</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.cthulhu</groupId>
+            <artifactId>rpc-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>

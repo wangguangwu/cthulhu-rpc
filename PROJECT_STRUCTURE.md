@@ -44,10 +44,12 @@ Cthulhu RPC 是一个插件化、可扩展的 Java RPC 框架，通过模块化�
   - `http`：基于 HTTP 的传输实现
 
 - **rpc-protocol**：协议定义和实现
-  - `cthulhu`：Cthulhu 自定义协议
-  - `http`：HTTP 协议支持
-  - `grpc`：gRPC 协议支持
-  - `codec`：协议编解码
+  - `rpc-protocol-api`：协议接口定义
+  - `rpc-protocol-cthulhu`：Cthulhu 自定义协议实现，完全定制化，结构灵活，控制力强
+  - `rpc-protocol-dubbo`：Dubbo 协议支持，阿里自研，二进制高性能传输协议
+  - `rpc-protocol-http`：HTTP/REST 协议支持，可读性强，易调试，兼容性好
+  - `rpc-protocol-grpc`：gRPC 协议支持，使用 Protobuf 编码，跨语言支持强，支持流式通信
+  - `rpc-protocol-thrift`：Thrift 协议支持，IDL 定义接口 + 多协议 + 多序列化支持
 
 ### 服务模块（P1 - 次高优先级）
 - **rpc-client**：客户端实现

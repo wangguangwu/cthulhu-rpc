@@ -5,18 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.cthulhu</groupId>
-        <artifactId>cthulhu-rpc</artifactId>
+        <artifactId>rpc-protocol</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>rpc-protocol</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>rpc-protocol-grpc</artifactId>
     
-    <modules>
-        <module>rpc-protocol-api</module>
-        <module>rpc-protocol-cthulhu</module>
-        <module>rpc-protocol-dubbo</module>
-        <module>rpc-protocol-http</module>
-        <module>rpc-protocol-grpc</module>
-        <module>rpc-protocol-thrift</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>com.cthulhu</groupId>
+            <artifactId>rpc-protocol-api</artifactId>
+        </dependency>
+    </dependencies>
 </project>
