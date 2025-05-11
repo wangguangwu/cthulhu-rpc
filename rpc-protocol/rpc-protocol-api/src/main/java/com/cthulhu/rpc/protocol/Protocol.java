@@ -9,6 +9,8 @@ import com.cthulhu.rpc.core.extension.SPI;
 /**
  * Protocol 接口定义了 RPC 协议的基本行为
  * 所有协议实现必须实现此接口
+ *
+ * @author wangguangwu
  */
 @SPI
 public interface Protocol {
