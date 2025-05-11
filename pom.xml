@@ -1,54 +1,452 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.5</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>com.wangguangwu</groupId>
-	<artifactId>cthulhu-rpc</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>cthulhu-rpc</name>
-	<description>cthulhu-rpc</description>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
-	<properties>
-		<java.version>17</java.version>
-	</properties>
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <groupId>com.cthulhu</groupId>
+    <artifactId>cthulhu-rpc</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>cthulhu-rpc</name>
+    <description>A plugin-based extensible RPC framework</description>
+    
+    <modules>
+        <module>rpc-api</module>
+        <module>rpc-common</module>
+        <module>rpc-core</module>
+        <module>rpc-client</module>
+        <module>rpc-server</module>
+        <module>rpc-protocol</module>
+        <module>rpc-registry</module>
+        <module>rpc-transport</module>
+        <module>rpc-processor</module>
+        <module>rpc-filter</module>
+        <module>rpc-security</module>
+        <module>rpc-governance</module>
+        <module>rpc-observability</module>
+        <module>examples</module>
+        <module>integration-test</module>
+    </modules>
+    
+    <properties>
+        <java.version>11</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        
+        <!-- 依赖版本 -->
+        <netty.version>4.1.104.Final</netty.version>
+        <zookeeper.version>3.8.3</zookeeper.version>
+        <nacos.version>2.2.3</nacos.version>
+        <protobuf.version>3.25.1</protobuf.version>
+        <jackson.version>2.16.1</jackson.version>
+        <junit.version>5.10.1</junit.version>
+        <slf4j.version>2.0.9</slf4j.version>
+        <logback.version>1.4.14</logback.version>
+        <prometheus.version>0.16.0</prometheus.version>
+        <micrometer.version>1.11.5</micrometer.version>
+        <jaeger.version>0.35.5</jaeger.version>
+        <zipkin.version>2.24.0</zipkin.version>
+        <resilience4j.version>2.1.0</resilience4j.version>
+    </properties>
+    
+    <dependencyManagement>
+        <dependencies>
+            <!-- 内部模块依赖 -->
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-server</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-protocol</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-registry</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-transport</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-processor</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-filter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-governance</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-observability</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-security</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
+            <!-- 协议模块 -->
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-protocol-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-protocol-custom</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-protocol-dubbo</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
+            <!-- 注册中心模块 -->
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-registry-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-registry-zookeeper</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-registry-nacos</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
+            <!-- 序列化模块 -->
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-serialize-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-serialize-jdk</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-serialize-json</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-serialize-protobuf</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
+            <!-- 传输模块 -->
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-transport-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-transport-netty</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-transport-http</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
+            <!-- 负载均衡模块 -->
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-loadbalancer-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-loadbalancer-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
+            <!-- 处理器模块 -->
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-processor-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-processor-default</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
+            <!-- 指标模块 -->
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-metrics-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-metrics-prometheus</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
+            <!-- 链路追踪模块 -->
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-tracing-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-tracing-jaeger</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
+            <!-- 弹性模块 -->
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-resilience-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-resilience-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
+            <!-- 过滤器模块 -->
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-filter-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-filter-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
+            <!-- 配置模块 -->
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-config-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-config-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
+            <!-- 安全模块 -->
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-security-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-security-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
+            <!-- 治理模块 -->
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-governance-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-governance-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
+            <!-- 扩展模块 -->
+            <dependency>
+                <groupId>com.cthulhu</groupId>
+                <artifactId>rpc-extension</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
+            <!-- 第三方依赖 -->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.zookeeper</groupId>
+                <artifactId>zookeeper</artifactId>
+                <version>${zookeeper.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-client</artifactId>
+                <version>${nacos.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.protobuf</groupId>
+                <artifactId>protobuf-java</artifactId>
+                <version>${protobuf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            
+            <!-- 日志依赖 -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            
+            <!-- 测试依赖 -->
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            
+            <!-- 指标依赖 -->
+            <dependency>
+                <groupId>io.prometheus</groupId>
+                <artifactId>simpleclient</artifactId>
+                <version>${prometheus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-core</artifactId>
+                <version>${micrometer.version}</version>
+            </dependency>
+            
+            <!-- 链路追踪依赖 -->
+            <dependency>
+                <groupId>io.opentracing</groupId>
+                <artifactId>opentracing-api</artifactId>
+                <version>${jaeger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.opentracing</groupId>
+                <artifactId>opentracing-util</artifactId>
+                <version>${jaeger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jaegertracing</groupId>
+                <artifactId>jaeger-client</artifactId>
+                <version>${jaeger.version}</version>
+            </dependency>
+            
+            <!-- 弹性依赖 -->
+            <dependency>
+                <groupId>io.github.resilience4j</groupId>
+                <artifactId>resilience4j-core</artifactId>
+                <version>${resilience4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.resilience4j</groupId>
+                <artifactId>resilience4j-circuitbreaker</artifactId>
+                <version>${resilience4j.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    
+    <dependencies>
+        <!-- 所有模块共用的依赖 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <compilerArgs>
+                        <arg>--add-modules</arg>
+                        <arg>java.base</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.2</version>
+            </plugin>
+        </plugins>
+    </build>
 </project>
