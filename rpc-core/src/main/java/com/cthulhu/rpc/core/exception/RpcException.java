@@ -35,6 +35,11 @@ public class RpcException extends RuntimeException {
     public static final int SERIALIZATION_EXCEPTION = 4;
     
     /**
+     * 协议异常
+     */
+    public static final int PROTOCOL_EXCEPTION = 5;
+    
+    /**
      * 异常类型
      */
     private int code;
@@ -67,6 +72,11 @@ public class RpcException extends RuntimeException {
     
     public RpcException(int code, String message, Throwable cause) {
         super(message, cause);
+        this.code = code;
+    }
+    
+    public RpcException(int code, Throwable cause) {
+        super(cause);
         this.code = code;
     }
     

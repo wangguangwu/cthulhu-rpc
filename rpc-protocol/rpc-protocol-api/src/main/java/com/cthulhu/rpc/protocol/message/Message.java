@@ -35,7 +35,7 @@ public interface Message extends Serializable {
      *
      * @return 附加属性Map
      */
-    Map<String, Object> getAttachments();
+    Map<String, String> getAttachments();
 
     /**
      * 获取特定附加属性
@@ -43,7 +43,7 @@ public interface Message extends Serializable {
      * @param key 属性键
      * @return 属性值
      */
-    Object getAttachment(String key);
+    String getAttachment(String key);
 
     /**
      * 设置附加属性
@@ -51,5 +51,5 @@ public interface Message extends Serializable {
      * @param key 属性键
      * @param value 属性值
      */
-    void setAttachment(String key, Object value);
+    void setAttachment(String key, String value);
 }

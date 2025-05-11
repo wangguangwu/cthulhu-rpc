@@ -5,6 +5,8 @@ import java.util.Map;
 /**
  * Invocation - 调用信息
  * 包含方法名、参数类型和参数值等调用信息
+ * 
+ * @author wangguangwu
  */
 public interface Invocation {
     /**
@@ -33,7 +35,7 @@ public interface Invocation {
      *
      * @return 附加参数Map
      */
-    Map<String, String> getAttachments();
+    Map<String, Object> getAttachments();
 
     /**
      * 获取调用者接口
